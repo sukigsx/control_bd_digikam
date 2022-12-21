@@ -1,0 +1,17 @@
+-- Instalacion de paquetes --
+ 
+Este script lo que hace, es automatizar el proceso de montar unidades en tu distro de linux, escanea tu red y busca servidores de archivos que utilizan el protocolo SAMBA.
+ 
+¿Que puedes hacer con este script?
+0. Actualizar el script.
+1. Ver/editar fichero de configuracion.
+2. Ver direcciones ip de tu red.
+3. Ver las carpetas compartidas de tu servidor.
+4. Resetear toda la configuracion.
+5. Montar las unidades.
+6. Desmontar todas las unidades.
+7. Montar las unidades al inicio del sistema. (crontab).
+
+
+software en /usr/bin
+iconos en /usr/share/icons/montar-unidades.png

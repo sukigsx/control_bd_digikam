@@ -1,0 +1,146 @@
+[DEBREATE-0.7.13]
+<<CTRL>>
+Package: Montar-Unidades
+Version: 1
+Maintainer: sukigsx <mbsistemas.sukigsx@gmail.com>
+Architecture: all
+Priority: optional
+Description: Monta unidades de servidores samba.
+ Este script lo que hace, es automatizar el proceso de montar unidades en tu distro de linux, escanea tu red y busca servidores de archivos que utilizan el protocolo SAMBA.
+ .
+ ¿Que puedes hacer con este script?
+ 0. Actualizar el script.
+ 1. Ver/editar fichero de configuracion.
+ 2. Ver direcciones ip de tu red.
+ 3. Ver las carpetas compartidas de tu servidor.
+ 4. Resetear toda la configuracion.
+ 5. Montar las unidades.
+ 6. Desmontar todas las unidades.
+ 7. Montar las unidades al inicio del sistema. (crontab).
+
+<</CTRL>>
+<<FILES>>
+1
+/home/sukigsx/Documentos/github/Montar_Unidades/iconos/montar-unidades.png -> montar-unidades.png -> /usr/share/icons/montar-unidades
+/home/sukigsx/Documentos/github/Montar_Unidades/codigo/montar_unidades.sukigsx.sh* -> montar_unidades.sukigsx.sh -> /bin
+<</FILES>>
+<<SCRIPTS>>
+<<PREINST>>
+0
+<</PREINST>>
+<<POSTINST>>
+1
+rojo="\e[0;31m\033[1m" #rojo
+verde="\e[;32m\033[1m" 
+azul="\e[0;34m\033[1m"
+amarillo="\e[0;33m\033[1m"
+rosa="\e[0;35m\033[1m"
+turquesa="\e[0;36m\033[1m"
+borra_colores="\033[0m\e[0m" #borra colores
+clear
+echo ""
+echo "${azul} ███████  ██    ██  ██   ██  ██  ██████    ███████  ██   ██${borra_colores}"
+echo "${azul} ██       ██    ██  ██  ██   ██  ██        ██        ██ ██ ${borra_colores}"
+echo "${azul} ███████  ██    ██  █████    ██  ██   ███  ███████    ███  ${borra_colores}"
+echo "${azul}      ██  ██    ██  ██  ██   ██  ██    ██       ██   ██ ██ ${borra_colores}"
+echo "${azul} ███████   ██████   ██   ██  ██   ██████   ███████  ██   ██${borra_colores}"
+echo ""
+echo "Cuando instalas un script mio. Se genera una funcion a nivel de bashrc"
+echo " para que desde un terminal con el comando ( scripts ) puedas ver"
+echo " todos los scripts que tienes instalados en tu maquina."
+echo ""
+if [ -f /etc/bash.bashrc.sukigsx ]
+then
+    echo " no"
+    exit
+else
+    echo "" >> /etc/bash.bashrc.sukigsx
+    echo "# Mete al /etc/bash.bashrc la funcion de ver scripts" >> /etc/bash.bashrc.sukigsx
+    echo 'echo "------------------------------------------------------------------"' >> /etc/bash.bashrc.sukigsx
+    echo 'echo "-    Ver  Scripts  instalados  de  sukigsx  =  scripts           -"' >> /etc/bash.bashrc.sukigsx
+    echo 'echo "------------------------------------------------------------------"' >> /etc/bash.bashrc.sukigsx
+    echo 'echo ""' >> /etc/bash.bashrc.sukigsx
+    echo "" >> /etc/bash.bashrc.sukigsx
+    echo "scripts() {"  >> /etc/bash.bashrc.sukigsx
+    echo 'clear' >> /etc/bash.bashrc.sukigsx
+    echo "echo '---------------------------- SUKIGSX -----------------------------'" >> /etc/bash.bashrc.sukigsx
+    echo "echo '-         LISTADO DE LOS SCRIPTS INSTALADOS EN TU SISTEMA        -'" >> /etc/bash.bashrc.sukigsx
+    echo "echo '------------------------------------------------------------------'" >> /etc/bash.bashrc.sukigsx
+    echo 'echo ""' >> /etc/bash.bashrc.sukigsx
+    echo "ls -l /usr/bin/*.sukigsx.sh | awk '{print "'$9'"}' | awk -F/ '{print "'"[*] "'" "'$4'"}'" >> /etc/bash.bashrc.sukigsx
+    echo 'echo ""' >> /etc/bash.bashrc.sukigsx
+    echo "echo '------------------------------------------------------------------'" >> /etc/bash.bashrc.sukigsx
+    echo "}" >> /etc/bash.bashrc.sukigsx
+    echo "" >> /etc/bash.bashrc.sukigsx
+               
+    #mete al .bashrc la orden de carga del fifhero /etc/bash.bashrc
+    echo "source /etc/bash.bashrc.sukigsx" >> /etc/bash.bashrc
+fi
+<</POSTINST>>
+<<PRERM>>
+0
+<</PRERM>>
+<<POSTRM>>
+1
+rojo="\e[0;31m\033[1m" #rojo
+verde="\e[;32m\033[1m" 
+azul="\e[0;34m\033[1m"
+amarillo="\e[0;33m\033[1m"
+rosa="\e[0;35m\033[1m"
+turquesa="\e[0;36m\033[1m"
+borra_colores="\033[0m\e[0m" #borra colores
+clear
+echo ""
+echo "${azul} ███████  ██    ██  ██   ██  ██  ██████    ███████  ██   ██${borra_colores}"
+echo "${azul} ██       ██    ██  ██  ██   ██  ██        ██        ██ ██ ${borra_colores}"
+echo "${azul} ███████  ██    ██  █████    ██  ██   ███  ███████    ███  ${borra_colores}"
+echo "${azul}      ██  ██    ██  ██  ██   ██  ██    ██       ██   ██ ██ ${borra_colores}"
+echo "${azul} ███████   ██████   ██   ██  ██   ██████   ███████  ██   ██${borra_colores}"
+echo ""
+echo "- ${verde}Se ha desistalado el script.${borra_colores}"
+echo ""
+echo "- ${amarillo}Si tienes mas scripts mios instalados, selecciona ( N ).${borra_colores}"
+read -p "- Deseas borrar los datos a nivel de bashrc? (S/N) -->> " sn
+if [ $sn = "S" ] || [ $sn = "s" ]
+then 
+    echo ""
+    echo "-${verde} Funcion a nivel de bashrc, a sido borrada.${borra_colores}"
+    sudo rm /etc/bash.bashrc.sukigsx 2>/dev/null
+    sudo sed -i '/source/d' /etc/bash.bashrc
+    echo "- ${verde}Muchas gracias...${borra_colores}"
+    echo ""
+else
+    echo ""
+    echo "- ${verde}Muchas gracias...${borra_colores}"
+    echo ""
+    exit 
+fi
+echo ""
+<</POSTRM>>
+<</SCRIPTS>>
+<<CHANGELOG>>
+<<DEST>>DEFAULT<</DEST>>
+
+<</CHANGELOG>>
+<<COPYRIGHT>>
+
+<</COPYRIGHT>>
+<<MENU>>
+1
+Name=Montar-unidades
+Version=1.0
+Exec=bash /usr/bin/montar_unidades.sukigsx.sh
+Comment=--  Monta unidades de un servidor samba. --
+Icon=/usr/share/icons/montar-unidades/montar-unidades.png
+Type=Application
+Terminal=true
+StartupNotify=true
+Encoding=UTF-8
+Categories=Utility;System;
+<</MENU>>
+<<BUILD>>
+1
+1
+1
+strip
+<</BUILD>>
