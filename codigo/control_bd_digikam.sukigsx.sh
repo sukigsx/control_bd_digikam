@@ -71,7 +71,7 @@ if [ -e /usr/bin/control_bd_digikam.sukigsx.sukigsx.sh ] #comprueba si se ha ins
 then
     ruta="/usr/bin"
     mkdir /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
-    git clone https://github.com/sukigsx/configuracion_bd_digikam.git /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+    git clone https://github.com/sukigsx/control_bd_digikam.git /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
     diff /tmp/com_update/codigo/control_bd_digikam.sukigsx.sh $ruta/control_bd_digikam.sukigsx.sh 2>/dev/null 1>/dev/null 0>/dev/null
     if [ $? = "0" ] 2>/dev/null 1>/dev/null 0>/dev/null
     then
@@ -83,7 +83,7 @@ then
 else
     ruta=$(pwd)
     mkdir /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
-    git clone https://github.com/sukigsx/configuracion_bd_digikam.git /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+    git clone https://github.com/sukigsx/control_bd_digikam.git /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
     diff /tmp/com_update/codigo/control_bd_digikam.sukigsx.sh $ruta/control_bd_digikam.sukigsx.sh 2>/dev/null 1>/dev/null 0>/dev/null
     if [ $? = "0" ] 2>/dev/null 1>/dev/null 0>/dev/null
     then
