@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #colores
 rojo="\e[0;31m\033[1m" #rojo
 verde="\e[;32m\033[1m"
