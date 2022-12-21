@@ -160,6 +160,7 @@ fi
 while :
 do
 clear
+echo -e "${turquesa}"; figlet SUKIGSX; echo -e "${borra_colores}"
 echo -e ""
 echo -e "${verde} Seleciona una opcion del menu para tu ejecucion de DIGIKAM.${borra_colores}"
 echo -e ""
