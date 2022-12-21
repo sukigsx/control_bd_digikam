@@ -1,28 +1,38 @@
 [DEBREATE-0.7.13]
 <<CTRL>>
-Package: Montar-Unidades
+Package: Control-bd-digikam
 Version: 1
 Maintainer: sukigsx <mbsistemas.sukigsx@gmail.com>
 Architecture: all
 Priority: optional
 Description: Monta unidades de servidores samba.
- Este script lo que hace, es automatizar el proceso de montar unidades en tu distro de linux, escanea tu red y busca servidores de archivos que utilizan el protocolo SAMBA.
+ Este script lo que hace, es tener sincronizada la base de datos de digikam para poder funcionar con los mismos datos en varias estancias.
  .
- ¿Que puedes hacer con este script?
- 0. Actualizar el script.
- 1. Ver/editar fichero de configuracion.
- 2. Ver direcciones ip de tu red.
- 3. Ver las carpetas compartidas de tu servidor.
- 4. Resetear toda la configuracion.
- 5. Montar las unidades.
- 6. Desmontar todas las unidades.
- 7. Montar las unidades al inicio del sistema. (crontab).
+ las opciones de su menu son:
+ .
+ 1- Ejecutar Digikam.
+ .
+  2- Copiar la Base de datos del servidor a local.
+      Esto BORRARA la base de datos de tu ordenador.
+ .
+  3- Copiar la base de datos de local al servidor.
+      Esto BORRARA la base de datos del SERVIDOR.
+ .
+  4- Ver fichero de configuracion del script.
+ .
+   5- Resetear la configuracion del script.
+ .
+   6- Borrar la configuracion de digikam (base de datos y ficheros de configuracion).
+ .
+  90- Ayuda.
+ .
+  99- Salir (Ctrl-c).
 
 <</CTRL>>
 <<FILES>>
 1
-/home/sukigsx/Documentos/github/Montar_Unidades/iconos/montar-unidades.png -> montar-unidades.png -> /usr/share/icons/montar-unidades
-/home/sukigsx/Documentos/github/Montar_Unidades/codigo/montar_unidades.sukigsx.sh* -> montar_unidades.sukigsx.sh -> /bin
+/home/sukigsx/Documentos/github/control_bd_digikam/iconos/control-bd-digikam.png -> control-bd-digikam.png -> /usr/share/icons/control-bd-digikam/
+/home/sukigsx/Documentos/github/control_bd_digikam/codigo/control_bd_digikam.sukigsx.sh -> control_bd_digikam.sukigsx.sh -> /usr/bin
 <</FILES>>
 <<SCRIPTS>>
 <<PREINST>>
@@ -127,16 +137,16 @@ echo ""
 <</COPYRIGHT>>
 <<MENU>>
 1
-Name=Montar-unidades
+Name=Control-bd-digikam
 Version=1.0
-Exec=bash /usr/bin/montar_unidades.sukigsx.sh
-Comment=--  Monta unidades de un servidor samba. --
-Icon=/usr/share/icons/montar-unidades/montar-unidades.png
+Exec=bash /usr/bin/control_bd_digikam.sukigsx.sh
+Comment=--  Sincronizada la base de datos de digikam para poder funcionar con los mismos datos en varias estancias. . --
+Icon=/usr/share/icons/control-bd-digikam/control-bd-digikam.png
 Type=Application
 Terminal=true
 StartupNotify=true
 Encoding=UTF-8
-Categories=Utility;System;
+Categories=Graphics;
 <</MENU>>
 <<BUILD>>
 1
