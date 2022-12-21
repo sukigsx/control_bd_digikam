@@ -163,6 +163,8 @@ clear
 echo -e ""
 echo -e "${verde} Seleciona una opcion del menu para tu ejecucion de DIGIKAM.${borra_colores}"
 echo -e ""
+echo -e "  0- ${verde}Actualizar el script.${borra_colores}"
+echo -e ""
 echo -e "  1- ${verde}Ejecutar Digikam.${borra_colores}"
 echo -e ""
 echo -e "  2- ${amarillo}Copiar la Base de datos del servidor a local.${borra_colores}"
@@ -182,6 +184,40 @@ echo -e " 99- ${turquesa}Salir (Ctrl-c).${borra_colores}"
 echo -e ""
 read -p " Escoje una opcion -->> " opcion
     case $opcion in
+
+        0)  #actualizar el script
+            if [ -e /usr/bin/montar_unidades.sukigsx.sh ] #comprueba si se ha instalado el script con el deb, comprobando el fichero /usr/bin/inicio.sukigsx.sh
+            then
+                ruta="/usr/bin"
+                cd /tmp
+                mkdir temporal_update
+                git clone https://github.com/sukigsx/control_bd_digikam.git /tmp/temporal_update
+                cd /tmp/temporal_update/codigo/
+                sudo chmod +x $ruta/*.sukigsx.sh
+                sudo cp -r /tmp/temporal_update/codigo/* $ruta
+                sudo rm -r /tmp/temporal_update
+                clear
+                echo "";
+                echo -e "${verde} Script actualizado. Tienes que reiniciar el script para ver los cambios.${borra_colores}";
+                echo "";
+                read -p " Pulsa una tecla para continuar." pause
+                ctrl_c;
+            else
+                ruta=$(pwd)
+                cd /tmp
+                mkdir temporal_update
+                git clone https://github.com/sukigsx/control_bd_digikam.git /tmp/temporal_update
+                cd /tmp/temporal_update/codigo/
+                sudo chmod +x $ruta/*.sukigsx.sh
+                sudo cp -r /tmp/temporal_update/codigo/* $ruta
+                sudo rm -r /tmp/temporal_update
+                clear
+                echo "";
+                echo -e "${verde} Script actualizado. Tienes que reiniciar el script para ver los cambios.${borra_colores}";
+                echo "";
+                read -p " Pulsa una tecla para continuar." pause
+                ctrl_c;
+            fi;;
 
         1)  #ejecutar el digikam
             wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz
