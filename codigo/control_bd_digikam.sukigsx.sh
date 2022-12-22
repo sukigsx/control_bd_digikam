@@ -1,7 +1,4 @@
 #!/bin/bash
-
-
-
 #colores
 rojo="\e[0;31m\033[1m" #rojo
 verde="\e[;32m\033[1m"
@@ -376,7 +373,7 @@ read -p " Escoje una opcion -->> " opcion
                 echo 'Categories=Graphics;' >> /home/$(whoami)/Escritorio/Control-bd-digikam.desktop
             fi
             echo -e ""
-            echo -e "${verde} Listo, Acceso creado en tu escritio.${borra_colores}"
+            echo -e "${verde} Listo, Acceso creado en tu escritorio.${borra_colores}"
             sleep 3;;
 
         90) #ayuda
