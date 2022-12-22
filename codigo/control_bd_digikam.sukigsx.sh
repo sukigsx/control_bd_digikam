@@ -79,7 +79,7 @@ then
     else
         echo -e " [${rojo}X${borra_colores}] ${amarillo}script NO actualizado, puedes actualizarlo en la opcion ( 0 ).${borra_colores}";sleep 2
     fi
-    sudo rm -r /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+        rm -rf /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
 else
     ruta=$(pwd)
     mkdir /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
@@ -178,6 +178,8 @@ echo -e "  4- ${verde}Ver fichero de configuracion del script.${borra_colores}"
 echo -e "  5- ${amarillo}Resetear la configuracion del script.${borra_colores}"
 echo -e ""
 echo -e "  6- ${rojo}Borrar la configuracion de digikam (base de datos y ficheros de configuracion).${borra_colores}"
+echo -e ""
+echo -e "  7- ${verde}Crear un acceso directo en el Escritorio.${borra_colores}"
 echo -e ""
 echo -e " 90- ${verde}Ayuda.${borra_colores}"
 echo -e ""
@@ -343,12 +345,76 @@ read -p " Escoje una opcion -->> " opcion
             fi;;
 
 
-        7)  echo "has seleccionado la tres";
-            read p;;
+        7)  #crea un acceso directo en el escritorio Control-bd-digikam.desktop
+            if [ -d /home/$(whoami)/Desktop ] #comprueba si el nombre del escritorio esta en igles o no
+            then
+                echo '[Desktop Entry]' >> /home/$(whoami)/Desktop/Control-bd-digikam.desktop
+                echo 'Name=Control-bd-digikam' >> /home/$(whoami)/Desktop/Control-bd-digikam.desktop
+                echo 'Version=1.0' >> /home/$(whoami)/Desktop/Control-bd-digikam.desktop
+                echo 'Exec=bash /usr/bin/control_bd_digikam.sukigsx.sh' >> /home/$(whoami)/Desktop/Control-bd-digikam.desktop
+                echo 'Comment=--  Sincronizada la base de datos de digikam para poder funcionar con los mismos datos en varias estancias. . --' >> /home/$(whoami)/Desktop/Control-bd-digikam.desktop
+                echo 'Icon=/usr/share/icons/control-bd-digikam/control-bd-digikam.png' >> /home/$(whoami)/Desktop/Control-bd-digikam.desktop
+                echo 'Type=Application' >> /home/$(whoami)/Desktop/Control-bd-digikam.desktop
+                echo 'Terminal=true' >> /home/$(whoami)/Desktop/Control-bd-digikam.desktop
+                echo 'StartupNotify=true' >> /home/$(whoami)/Desktop/Control-bd-digikam.desktop
+                echo 'Encoding=UTF-8' >> /home/$(whoami)/Desktop/Control-bd-digikam.desktop
+                echo 'Categories=Graphics;' >> /home/$(whoami)/Desktop/Control-bd-digikam.desktop
+            else
+                echo '[Desktop Entry]' >> /home/$(whoami)/Escritorio/Control-bd-digikam.desktop
+                echo 'Name=Control-bd-digikam' >> /home/$(whoami)/Escritorio/Control-bd-digikam.desktop
+                echo 'Version=1.0' >> /home/$(whoami)/Escritorio/Control-bd-digikam.desktop
+                echo 'Exec=bash /usr/bin/control_bd_digikam.sukigsx.sh' >> /home/$(whoami)/Escritorio/Control-bd-digikam.desktop
+                echo 'Comment=--  Sincronizada la base de datos de digikam para poder funcionar con los mismos datos en varias estancias. . --' >> /home/$(whoami)/Escritorio/Control-bd-digikam.desktop
+                echo 'Icon=/usr/share/icons/control-bd-digikam/control-bd-digikam.png' >> /home/$(whoami)/Escritorio/Control-bd-digikam.desktop
+                echo 'Type=Application' >> /home/$(whoami)/Escritorio/Control-bd-digikam.desktop
+                echo 'Terminal=true' >> /home/$(whoami)/Escritorio/Control-bd-digikam.desktop
+                echo 'StartupNotify=true' >> /home/$(whoami)/Escritorio/Control-bd-digikam.desktop
+                echo 'Encoding=UTF-8' >> /home/$(whoami)/Escritorio/Control-bd-digikam.desktop
+                echo 'Categories=Graphics;' >> /home/$(whoami)/Escritorio/Control-bd-digikam.desktop
+            fi
+            echo -e ""
+            echo -e "${verde} Listo, Acceso creado en tu escritio.${borra_colores}"
+            sleep 3;;
 
         90) #ayuda
-            echo "ayuda";
-            read p;;
+            clear
+            echo -e "${turquesa}"; figlet SUKIGSX; echo -e "${borra_colores}"
+            echo -e ""
+            echo -e " ${azul}Este script esta pensado para solucionar un problema con el programa de fotografia Digikam.${borra_colores}"
+            echo -e ""
+            echo -e " El problema es el siguiente. Digikam funciona perfectamente pero con una base de datos en la cual estan todos los datos de tus fotos"
+            echo -e " como son las etiquetas, las estrellas, etc. Pues bien, esa base de datos lo normar es tenerla en tu maquina local para que sea mas fluido"
+            echo -e " el funcionamiento del mismo."
+            echo -e ""
+            echo -e " ${azul}¿ Pero que pasa cuando queremos organizar las fotos en maquinas distintas ?.${borra_colores}"
+            echo -e ""
+            echo -e " Pues que no tenemos la base de datos en esas otras maquinas, para eso esta este script."
+            echo -e " Lo que hace es pedirte en donde quieres tener la base de datos principal, que la he denominado (servidor), en la cual estara la base de datos,"
+            echo -e " tambien te pedira la direccion de la base de datos en local."
+            echo -e ""
+            echo -e " Cuando termines de trabajar con digikam, sincronizas con el servidor y se pasara la base de datos al servidor, y si trabajas con otra maquina"
+            echo -e " solo tendras que sincronizar del servidor a local de esa maquina y tendras los mismos datos."
+            echo -e ""
+            echo -e ""
+            echo -e " ${verde}Opciones del menu del script.${borra_colores}"
+            echo -e ""
+            echo -e " ${verde}Opcion  ${azul}(0) Actualizar el script.${borra_colores} Su nombre lo dice, si saco alguna actualizacion o mejora, con esta opcion se actualiza."
+            echo -e " ${verde}Opcion  ${azul}(1) Ejecuta digikam.${borra_colores} Pues eso ejecuta Digikam"
+            echo -e " ${verde}Opcion  ${azul}(2) Copiar la base de datos del servido a local.${borra_colores} Sincroniza la base de datos de tu servidor y la coloca en local de tu maquina."
+            echo -e " ${verde}Opcion  ${azul}(3) Copiar la base de datos local al servidor.${borra_colores} Sincroniza al reves, para que la base de datos este en el servidor actualizada"
+            echo -e "                                                        y puedes acceder mas tarde desde otra maquina y tener los mismo datos"
+            echo -e ""
+            echo -e " ${verde}Opcion  ${azul}(4) Ver el fichero de configuracion.${borra_colores} Para que este script funcione tienes que indicarle la ruta del servidor como la ruta en local,"
+            echo -e "                                              con esta opcion puedes ver los datos."
+            echo -e ""
+            echo -e " ${verde}Opcion  ${azul}(5) Resetear la configuracion del script.${borra_colores} Lo dicho, borra los datos de configuracion y te los pide de nuevo, sin ellos no puede funcionar."
+            echo -e " ${verde}Opcion  ${azul}(6) Borra la configuracion de Digikam y la base de datos.${borra_colores} Eso, deja a Digikam como recien instalado."
+            echo -e " ${verde}Opcion  ${azul}(7) Crear un acceso directo en el escritorio.${borra_colores} Te crea un acceso en el escritorio de forma automatica."
+            echo -e " ${verde}Opcion ${azul}(90) Ayuda.${borra_colores} Lo que estas viendo."
+            echo -e " ${verde}Opcion ${azul}(99) Salir.${borra_colores} Pues sale del script."
+            echo -e ""
+            echo -e "${amarillo} Pulsa una tecla cuando estes listo.${borra_colores}"
+            read pause;;
 
         99)  ctrl_c;;
 
