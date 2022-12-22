@@ -91,7 +91,7 @@ else
     else
         echo -e " [${rojo}XX${borra_colores}] ${amarillo}script NO actualizado, puedes actualizarlo en la opcion ( 0 ).${borra_colores}";sleep 3
     fi
-    sudo rm -r /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+        rm -rf /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
 fi
 echo ""
 echo -e " ${verde}Todo el software correcto.${borra_colores}"
