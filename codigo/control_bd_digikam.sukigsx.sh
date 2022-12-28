@@ -270,7 +270,7 @@ read -p " Escoje una opcion -->> " opcion
                     echo -e ""
                     echo -e "${amarillo} Sincronizando base de datos.${borra_colores}"
                     echo -e ""
-                    rsync -r --delete --progress $baselocal $baseservidor
+                    rsync -r --progress $baselocal $baseservidor
                     if diff $baseservidor $baselocal  0>/dev/null 1>/dev/null 2>/dev/null
                     then
                         echo -e ""
